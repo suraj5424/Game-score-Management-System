@@ -1,27 +1,112 @@
-## Combat Game Management Program Description
+# Combat Game Management System
 
-The task was to develop a C++ program to efficiently manage combat games, transitioning from a paper-based system to a digital one. The program is designed to handle up to six participants, or players, in a combat game, facilitating the recording, managing, and outputting of player data and game outcomes.
+This project is a **Combat Game Management System** written in C++. The program manages the registration of players, handles combat games between them, and tracks their performance. The program ensures that a player can participate in a maximum of three combat games, records combat results, and allows viewing the list of registered players and winners of each game.
 
-### Program Features
+## Features
 
-- **Player Data Entry**: For each of the six players, the program captures and stores essential details such as a unique number, surname, first name, height (in cm), weight (in kg), points accumulated, and year of birth. This data entry is facilitated through the overloading of the istream (`>>`) operator, ensuring a streamlined process.
+- **Player Registration**: You can register up to 6 players with unique player numbers.
+- **Combat Game Management**: Allows the management of combat games between two registered players, ensuring no player exceeds their combat participation limit (3 combats).
+- **Results Tracking**: Displays combat results, including the winner and loser of each game. 
+- **Player Information**: Allows the viewing of registered players' details and their combat history (wins, losses, and draws).
+- **Combat Rules**: 
+  - 10 points are awarded for a win.
+  - 5 points are awarded for a draw.
+  - No points are given for a loss.
 
-- **Combat Game Management**: The program allows for the entry of combat game results, dynamically adjusting players' points based on the outcomes (win, tie, or loss). Each player can participate in up to three fights, with points awarded as follows: 10 points for a win, 5 points for a tie, and no points for a loss. The program then identifies and displays the game winner.
+## Classes and Functions
 
-- **Comparison Operator Overloading**: Through the overloading of the `>=` operator, the program can compare the physical attributes (height and weight) of the combatants, outputting the comparative advantage of the winner over the loser.
+### 1. **Player Class**
+This class stores all the details related to a player:
+- Player number
+- Surname and first name
+- Height and weight
+- Year of birth
+- Combat history (participations, wins, losses, draws, total points)
 
-- **Players Output**: Utilizing the ostream (`<<`) operator overloading, the program outputs detailed information on all players, including their personal details, the number of games participated in, the outcomes of these games, and the total points earned.
+#### Key Methods:
+- `won()`: Updates win count and adds 10 points.
+- `lose()`: Updates loss count.
+- `draw()`: Updates draw count and adds 5 points.
+- `updateCombat()`: Increments the player's combat participation count.
+- `getPlayerInfo()`: Returns a string with the player's name, birth year, height, and weight.
 
-- **Winner Announcement**: The program includes a feature to announce the overall winner based on the points accumulated.
+### 2. **CombatResult Class**
+This class stores the result of a combat between two players, with pointers to the winner and loser.
 
-- **Program Exit**: Users can easily exit the program once they have completed their tasks.
+### 3. **Helper Functions**
+- `checkByNumber()`: Checks if a player with a specific number exists in the registered players list.
+- `printPlayers()`: Prints details of all registered players.
+- `printCombatResults()`: Prints the results of all completed combats.
 
-### Technical Implementation
+### 4. **Main Function**
+The main function controls the flow of the program, offering the following options to the user:
+- Register a new player.
+- Manage a combat between two registered players.
+- Output all players' information.
+- Output the winners and losers of combat games.
+- Exit the program.
 
-The program is dynamically constructed using pointers to ensure efficient memory management and scalability. This dynamic approach allows for modifications and expansions, such as adding more players or adjusting the game rules, without significant rework.
+## Program Flow
 
-Messages are displayed throughout the program to guide the user during data entry, combat management, and when outputting results, ensuring a user-friendly experience.
+1. **Create Player**: The program allows users to create up to 6 players. Each player must have a unique number. The user provides the player's surname, first name, height, weight, and birth year.
+   
+2. **Manage Combat**: Users can select two registered players to engage in a combat. The user chooses the result: either one of the players wins, or the combat is a draw. The system updates both players' records accordingly.
+   
+3. **View All Players**: The program outputs a list of all registered players, showing their combat history (wins, losses, draws, and total points).
 
-**Note**: As specified, the program does not include permanent data storage capabilities. All player data and game outcomes are only available during the runtime of the application, meeting the project's requirements for simplicity and focus on in-memory data management.
+4. **View Combat Results**: Displays the winners and losers of all completed combats.
 
-This program represents a significant improvement in managing combat games, offering a digital solution that is both efficient and scalable.
+## Getting Started
+
+### Prerequisites
+You need a C++ compiler to compile and run this program, such as:
+
+- GCC (GNU Compiler Collection)
+- Visual Studio with C++ support
+- Xcode (for macOS)
+
+### Compilation
+
+To compile the program, use the following command (assuming you're using GCC):
+
+```bash
+g++ combat_game.cpp -o combat_game
+```
+
+### Running the Program
+
+After compilation, you can run the program by executing the compiled file:
+
+```bash
+./combat_game
+```
+
+### Example Program Output
+
+```
+------:Welcome to the "Management System of Combat Games":------
+
+:::::Menu:::::
+1. Create player
+2. Manage combat game
+3. Output all players
+4. Output winner
+5. Program exit
+:::Please enter the INTEGER from the above list of your choice: 
+```
+
+## Example Usage
+
+1. **Create Player**: Enter unique player information such as number, surname, first name, height, weight, and birth year.
+2. **Manage Combat**: Select two players and choose the combat result. The system will update the combat history for both players.
+3. **View Players and Results**: List all players and view the winners of previous combats.
+
+## Future Improvements
+
+- Add functionality to handle player removal.
+- Improve error handling for invalid user input.
+- Implement more complex combat mechanics or player stats.
+  
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
